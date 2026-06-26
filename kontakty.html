@@ -115,7 +115,7 @@
         .contact-container {
             display: flex;
             flex-direction: column;
-            gap: 40px; /* Mezera mezi firemními údaji a vizitkami */
+            gap: 40px;
             margin-bottom: 50px;
         }
 
@@ -125,7 +125,7 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #1e2229; /* Tmavý pruh nahoře pro elegantní vzhled */
+            border-top: 4px solid #1e2229;
         }
 
         .company-info h2 {
@@ -159,8 +159,18 @@
             color: #333;
         }
 
+        .info-block a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .info-block a:hover {
+            text-decoration: underline;
+        }
+
         .registry-note {
-            grid-column: 1 / -1; /* Roztáhne poznámku přes celou šířku */
+            grid-column: 1 / -1;
             text-align: center;
             margin-top: 20px;
             font-size: 9pt;
@@ -251,6 +261,15 @@
             padding: 20px;
             font-size: 10pt;
         }
+        
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #ffffff;
+        }
 
         /* --- RESPONSIVITA (PRO MOBILY) --- */
         @media (max-width: 768px) {
@@ -269,7 +288,7 @@
                 padding-top: 150px;
             }
             .company-details-grid {
-                grid-template-columns: 1fr; /* Na mobilu se sloupce fakturace a adresy srovnají pod sebe */
+                grid-template-columns: 1fr;
                 text-align: center;
             }
         }
@@ -316,6 +335,9 @@
                         <p>Průmyslová 123</p>
                         <p>100 00 Město</p>
                         <p>Česká republika</p>
+                        <br>
+                        <p><strong>Obecné dotazy a poptávky:</strong></p>
+                        <p><a href="mailto:info@tkap.cz">info@tkap.cz</a></p>
                     </div>
 
                     <div class="registry-note">
@@ -343,4 +365,27 @@
                         <h4>Jméno Příjmení</h4>
                         <span class="team-role">Technolog / Obchod</span>
                         <p class="team-contact">
-                            Tel: <a href="tel:+42
+                            Tel: <a href="tel:+420123456789">+420 123 456 789</a>
+                        </p>
+                        <p class="team-contact">
+                            E-mail: <a href="mailto:jmeno@tkap.cz">jmeno@tkap.cz</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="map-container">
+            <p><em>Zde bude mapa. Na Google Maps dej "Sdílet", "Vložit mapu" a zkopíruj sem HTML kód.</em></p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TKAP. Všechna práva vyhrazena. | E-mail pro poptávky: <a href="mailto:info@tkap.cz">info@tkap.cz</a></p>
+    </footer>
+
+</body>
+</html>

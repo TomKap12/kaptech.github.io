@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Výroba bran, plotů a exteriérových prvků - TKAP.">
+    <title>Brány a ploty | TKAP</title>
+    <style>
+        /* --- ZÁKLADNÍ RESET A TYPOGRAFIE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HLAVIČKA A NAVIGAČNÍ LIŠTA --- */
+        header {
+            background-color: #1e2229;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 24pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .logo-text span {
+            color: #007bff;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 11pt;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-menu a:hover {
+            color: #007bff;
+        }
+
+        /* --- DETAIL SLUŽBY --- */
+        main {
+            flex: 1;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            max-width: 1000px; /* Užší formát pro lepší čtení textu */
+            margin: 0 auto;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .service-title {
+            font-size: 28pt;
+            color: #1e2229;
+            margin-bottom: 20px;
+            border-left: 5px solid #007bff;
+            padding-left: 15px;
+        }
+
+        .service-text {
+            font-size: 12pt;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .service-text p {
+            margin-bottom: 15px;
+        }
+
+        /* --- MINI GALERIE --- */
+        .mini-gallery-title {
+            font-size: 18pt;
+            margin-bottom: 20px;
+            color: #1e2229;
+            text-align: center;
+        }
+
+        .mini-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 15px; /* Zmenšeno, aby byl odkaz blíž k fotkám */
+        }
+
+        .mini-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Odkaz na celou galerii pod fotkama */
+        .more-gallery-link {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .more-gallery-link a {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 11pt;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .more-gallery-link a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* --- TLAČÍTKO POPTÁVKY --- */
+        .cta-section {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .cta-section h3 {
+            font-size: 16pt;
+            margin-bottom: 15px;
+            color: #1e2229;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 12pt;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: #1e2229;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 10pt;
+        }
+        
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        /* --- RESPONSIVITA (PRO MOBILY) --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            main {
+                padding-top: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LIŠTA NAHOŘE (Vrací zpět na hlavní stránku nebo do dalších sekcí) -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html" class="logo-text">TKAP<span>.</span></a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#domu">Domů</a></li>
+                    <li><a href="index.html#o-nas">O nás</a></li>
+                    <li><a href="index.html#sluzby">Služby</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="kontakty.html">Kontakty</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HLAVNÍ OBSAH -->
+    <main>
+        
+        <!-- Nadpis Služby -->
+        <h1 class="service-title">Brány, ploty a exteriér</h1>
+
+        <!-- Popis Služby -->
+        <div class="service-text">
+            <p><strong>Nabízíme kompletní realizaci exteriérových prvků od počátečního zaměření, přes grafický návrh, výrobu až po finální montáž přímo u vás.</strong></p>
+            
+            <p>Specializujeme se na výrobu samonosných, pojezdových i křídlových bran. Zákazníkům nabízíme širokou škálu výplní – od klasických kovářských prvků, přes moderní tahokov až po dřevoplastová prkna. Každá zakázka je řešena zcela individuálně s důrazem na maximální kvalitu svárů a tuhost konstrukce.</p>
+
+            <p>Součástí naší nabídky jsou také plotové dílce, ocelová schodiště, zábradlí a pergoly. Pro zajištění dlouhé životnosti a bezúdržbovosti provádíme povrchové úpravy pomocí žárového zinkování v kombinaci s kvalitním práškovým lakováním (komaxit) v jakémkoliv odstínu RAL.</p>
+        </div>
+
+        <!-- Ukázky práce k této službě -->
+        <h2 class="mini-gallery-title">Ukázky našich realizací</h2>
+        
+        <div class="mini-gallery">
+            <img src="https://picsum.photos/id/1040/400/300" alt="Detail brány">
+            <img src="https://picsum.photos/id/1039/400/300" alt="Plotový dílec">
+            <img src="https://picsum.photos/id/1038/400/300" alt="Schodiště v exteriéru">
+        </div>
+
+        <!-- NOVÝ ODKAZ DO GALERIE -->
+        <div class="more-gallery-link">
+            <a href="galerie.html">Zobrazit více v sekci Galerie &rarr;</a>
+        </div>
+
+        <!-- Call to action (výzva k akci) -->
+        <div class="cta-section">
+            <h3>Máte zájem o tuto službu nebo potřebujete poradit?</h3>
+            <p style="margin-bottom: 20px; color: #555;">Neváhejte nás kontaktovat. Rádi s vámi probereme detaily vaší zakázky a připravíme nezávaznou cenovou kalkulaci.</p>
+            <a href="kontakty.html" class="btn-primary">Přejít na kontakty</a>
+        </div>
+
+    </main>
+
+    <!-- PATIČKA -->
+    <footer>
+        <p>&copy; 2026 TKAP. Všechna práva vyhrazena. | E-mail pro poptávky: <a href="mailto:info@tkap.cz">info@tkap.cz</a></p>
+    </footer>
+
+</body>
+</html>
