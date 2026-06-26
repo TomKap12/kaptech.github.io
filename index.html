@@ -3,149 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRUTÁLNÍ TEST: STRÁNKA AKTIVNÍ</title>
+    <meta name="description" content="TKAP - Precizní strojírenská výroba, CNC obrábění a kovoobrábění.">
+    <title>TKAP | Strojírenská firma</title>
     <style>
-        /* ZÁKLADNÍ NASTAVENÍ: TVRDÝ KONTRAST */
-        :root {
-            --neon-green: #00ff00;
-            --black: #000000;
-            --white: #ffffff;
-            --magenta: #ff00ff;
-            --glitch-size: 5px;
+        /* --- ZÁKLADNÍ RESET A TYPOGRAFIE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Plynulé rolování na sekce po kliknutí v menu */
         }
 
         body {
-            background-color: var(--black);
-            color: var(--neon-green);
-            font-family: 'Courier New', Courier, monospace; /* Monospace pro raw look */
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
         }
 
-        /* TVRDÝ OBECNÝ STYL PRO VŠECHNY PRVKY */
-        * {
-            box-sizing: border-box;
-            border: 3px solid var(--neon-green); /* Všude tvrdé rámečky */
-            margin-bottom: 15px;
-        }
-
-        /* BRUTÁLNÍ HEADER: GLITCH EFEKT PŘES TEXT */
+        /* --- HLAVIČKA A NAVIGAČNÍ LIŠTA --- */
         header {
-            position: relative;
-            padding: 10px 30px;
-            background-color: var(--neon-green);
-            color: var(--black);
-            font-weight: bold;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            text-shadow: calc(var(--glitch-size) * -1) 0 var(--magenta), var(--glitch-size) 0 cyan;
-            animation: textGlitch 1.5s infinite alternate;
-        }
-
-        @keyframes textGlitch {
-            0% { text-shadow: -3px 0 var(--magenta), 3px 0 cyan; }
-            50% { text-shadow: 3px 0 var(--magenta), -3px 0 cyan; }
-            100% { text-shadow: 2px -2px var(--magenta), -2px 2px cyan; }
-        }
-
-        /* SEKCE S RAW GRAFIKOU (EMOJI) */
-        main {
+            background-color: #1e2229; /* Tmavá industriální barva */
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 800px;
-            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .raw-graphics {
-            font-size: 4rem;
-            text-align: center;
-            border: none; /* Odstraní rámeček jen pro emoji */
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between; /* Logo vlevo, menu vpravo */
+            align-items: center;
+            padding: 15px 20px;
         }
 
-        /* TVRDÁ KARTA PRO OBSAH */
-        .card {
-            border: 5px solid var(--neon-green);
-            background: linear-gradient(135deg, #001a00, #000000);
-            box-shadow: 10px 10px 0 var(--magenta); /* Neo-brutalist stín */
-            padding: 20px;
+        .logo img {
+            height: 50px; /* Výška vašeho loga */
+            display: block;
         }
 
-        h2 {
-            color: var(--white);
-            margin-top: 0;
-            border-bottom: 3px dashed var(--neon-green);
-            padding-bottom: 10px;
+        /* Pokud nemáte logo jako obrázek, použije se tento styl pro text */
+        .logo-text {
+            color: #ffffff;
+            font-size: 24pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .logo-text span {
+            color: #007bff; /* Modrý akcent */
         }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 1.4;
+        .nav-menu {
+            display: flex;
+            list-style: none;
         }
 
-        /* BRUTÁLNÍ TLAČÍTKO S GLITCH EFEKTEM NA HOVER */
-        .btn {
-            display: inline-block;
-            background-color: var(--magenta);
-            color: var(--white);
-            padding: 15px 30px;
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 11pt;
+            transition: color 0.3s ease;
             text-transform: uppercase;
-            border: 4px solid var(--black);
-            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            color: #007bff; /* Barva při najetí myší */
+        }
+
+        /* --- PREZENTACE / SLIDER (ANIMACE FOTEK) --- */
+        .slider-container {
+            margin-top: 80px; /* Odsazení kvůli fixní horní liště */
             position: relative;
-            transition: all 0.1s;
-        }
-
-        .btn:hover {
-            box-shadow: 8px 8px 0 var(--cyan);
-            transform: translate(-4px, -4px);
-        }
-
-        .btn::after {
-            content: '!! RAW OUTPUT !!';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--neon-green);
-            color: var(--black);
-            opacity: 0;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .btn:active::after {
-            opacity: 1;
-        }
-
-        /* FOOTER S CHATOVOU ATMOSFÉROU */
-        footer {
             width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%; /* Pro 3 fotky (každá 100%) */
+            height: 100%;
+            animation: cyclePhotos 15s infinite; /* Automatické cyklování */
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Zde si pak doplníte cesty ke svým fotkám z výroby */
+        .slide1 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1060/1920/1080'); }
+        .slide2 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1043/1920/1080'); }
+        .slide3 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/445/1920/1080'); }
+
+        /* Texty uvnitř prezentace */
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
-            font-size: 0.8rem;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .slide-content h2 {
+            font-size: 32pt;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .slide-content p {
+            font-size: 14pt;
+        }
+
+        /* Animace pro cyklování fotek */
+        @keyframes cyclePhotos {
+            0% { transform: translateX(0%); }
+            28% { transform: translateX(0%); }
+            33% { transform: translateX(-33.33%); }
+            61% { transform: translateX(-33.33%); }
+            66% { transform: translateX(-66.66%); }
+            95% { transform: translateX(-66.66%); }
+            100% { transform: translateX(0%); }
+        }
+
+        /* --- SEKTOR: O NÁS --- */
+        .section-about {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 24pt;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #007bff;
+        }
+
+        .about-text {
+            font-size: 12pt;
             color: #555;
-            border: none;
-            margin-top: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- SEKCE: SLUŽBY (DLAŽDICE) --- */
+        .section-services {
+            background-color: #ebedf0;
+            padding: 60px 20px;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Automatické dlaždice vedle sebe */
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Styl jedné dlaždice */
+        .service-tile {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none; /* Aby celá dlaždice mohla být odkazem */
+            color: inherit;
+            display: block;
+        }
+
+        /* Efekt při najetí na dlaždici */
+        .service-tile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .tile-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* NOVÉ OBRÁZKY PRO TVÉ DLAŽDICE */
+        .img-brany { background-image: url('https://picsum.photos/id/453/400/250'); }
+        .img-kovovyroba { background-image: url('https://picsum.photos/id/364/400/250'); }
+        .img-laser { background-image: url('https://picsum.photos/id/524/400/250'); }
+        .img-3dtisk { background-image: url('https://picsum.photos/id/391/400/250'); }
+
+        .tile-content {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .tile-content h3 {
+            font-size: 14pt;
+            margin-bottom: 10px;
+            color: #1e2229;
+        }
+
+        .tile-content p {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 15px;
+            height: 60px; /* Zajišťuje, že texty budou stejně vysoké a dlaždice budou zarovnané */
+            overflow: hidden;
+        }
+
+        .tile-link {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 10pt;
+            text-transform: uppercase;
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: #1e2229;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 10pt;
+        }
+
+        /* --- RESPONSIVITA (PRO MOBILY) --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-menu li {
+                margin: 0 10px;
+            }
+            .slider-container {
+                height: 350px;
+            }
+            .slide-content h2 {
+                font-size: 20pt;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>SYSTEM_STATUS_04</header>
-
-    <main>
-        <div class="raw-graphics">💀🔧👾</div>
-
-        <div class="card">
-            <h2>TEST_VERZE_01 // BRUTÁLNÍ</h2>
-            <p>Hele, tady máš tu slíbenou brutalistickou stránku. Je to schválně hnusný, ostrý a přehnaný. Monospace font, zářivý barvy, tvrdý stíny, žádný zjemňování. </p>
-            <p>Zkus na tuhle stránku nahrát nějaký nový obrázky (třeba tu vygenerovanou brutální grafiku) a otestuj, jak rychle GitHub Pages zareagují. </p>
-            <a href="#" class="btn">DESTRUKCE_LOGU</a>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <div class="logo-text">TKAP<span>.</span></div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#domu">Domů</a></li>
+                    <li><a href="#o-nas">O nás</a></li>
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="kontakty.html">Kontakty</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <main id="domu">
+
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide slide1">
+                    <div class="slide-content">
+                        <h2>Precizní strojírenská výroba</h2>
+                        <p>Kvalita a přesnost na prvním místě.</p>
+                    </div>
+                </div>
+                <div class="slide slide2">
+                    <div class="slide-content">
+                        <h2>Moderní CNC technologie</h2>
+                        <p>Zvládáme i ty nejnáročnější zakázky.</p>
+                    </div>
+                </div>
+                <div class="slide slide3">
+                    <div class="slide-content">
+                        <h2>Profesionální tým</h2>
+                        <p>Dlouholeté zkušenosti v kovoobrábění.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="o-nas" class="section-about">
+            <h2 class="section-title">O nás</h2>
+            <p class="about-text">
+                Strojírenská firma TKAP je stabilním partnerem v oblasti zakázkového kovoobrábění a zámečnické výroby. 
+                Disponujeme moderním strojním parkem a týmem zkušených profesionálů. Naším cílem je dodávat 
+                vysoce precizní komponenty přesně podle specifikací našich zákazníků, s důrazem na rychlost a kvalitu provedení.
+            </p>
+        </section>
+
+        <section id="sluzby" class="section-services">
+            <div class="services-container">
+                <h2 class="section-title">Naše Služby</h2>
+                
+                <div class="services-grid">
+                    
+                    <a href="#kontakt" class="service-tile">
+                        <div class="tile-image img-brany"></div>
+                        <div class="tile-content">
+                            <h3>Brány, ploty a exteriér</h3>
+                            <p>Návrh a výroba samonosných i křídlových bran, plotových dílců a moderních exteriérových prvků na zakázku.</p>
+                            <span class="tile-link">Více informací &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#kontakt" class="service-tile">
+                        <div class="tile-image img-kovovyroba"></div>
+                        <div class="tile-content">
+                            <h3>Zakázková kovovýroba</h3>
+                            <p>Kompletní zámečnické práce, výroba ocelových konstrukcí, regálových systémů a dílů dle vaší výkresové dokumentace.</p>
+                            <span class="tile-link">Více informací &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#kontakt" class="service-tile">
+                        <div class="tile-image img-laser"></div>
+                        <div class="tile-content">
+                            <h3>Laserové svařování</h3>
+                            <p>Špičková technologie pro vysoce pevné, přesné a esteticky dokonalé spoje bez deformace materiálu.</p>
+                            <span class="tile-link">Více informací &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#kontakt" class="service-tile">
+                        <div class="tile-image img-3dtisk"></div>
+                        <div class="tile-content">
+                            <h3>3D tisk a prototypování</h3>
+                            <p>Rychlá výroba prototypů, funkčních modelů a přípravků z moderních polymerů pro testování i finální nasazení.</p>
+                            <span class="tile-link">Více informací &rarr;</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>RAW_WEB_ALPHA v0.9 // POUŽITO_PRO_TEST_GITHUB_PAGES</footer>
+    <footer>
+        <p>&copy; 2026 TKAP s.r.o. Všechna práva vyhrazena.</p>
+    </footer>
 
 </body>
 </html>

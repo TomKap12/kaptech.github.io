@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galerie prací strojírenské firmy TKAP.">
+    <title>Galerie | TKAP</title>
+    <style>
+        /* --- ZÁKLADNÍ RESET A TYPOGRAFIE (stejné jako na hlavní straně) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Zaručí, že patička bude vždy dole */
+        }
+
+        /* --- HLAVIČKA A NAVIGAČNÍ LIŠTA --- */
+        header {
+            background-color: #1e2229;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 24pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .logo-text span {
+            color: #007bff;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 11pt;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #007bff;
+        }
+
+        /* --- SEKCE: GALERIE (Nový obsah) --- */
+        main {
+            flex: 1; /* Aby obsah vyplnil zbytek stránky k patičce */
+            padding-top: 100px; /* Odsazení kvůli fixní horní liště */
+            padding-bottom: 60px;
+        }
+
+        .section-gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 24pt;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #007bff;
+        }
+
+        .gallery-category {
+            margin-bottom: 50px;
+        }
+
+        .gallery-category h3 {
+            font-size: 18pt;
+            color: #1e2229;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: #1e2229;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 10pt;
+        }
+
+        /* --- RESPONSIVITA (PRO MOBILY) --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            main {
+                padding-top: 140px; /* Větší odsazení pro mobily (menu je vyšší) */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html" class="logo-text">TKAP<span>.</span></a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#domu">Domů</a></li>
+                    <li><a href="index.html#o-nas">O nás</a></li>
+                    <li><a href="index.html#sluzby">Služby</a></li>
+                    <li><a href="galerie.html" class="active">Galerie</a></li>
+                    <li><a href="index.html#kontakty">Kontakty</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-gallery">
+            <h1 class="section-title">Galerie naší práce</h1>
+            
+            <div class="gallery-category">
+                <h3>Brány, ploty a exteriér</h3>
+                <div class="gallery-grid">
+                    <img src="https://picsum.photos/id/1040/600/400" alt="Ukázka brány 1" class="gallery-img">
+                    <img src="https://picsum.photos/id/1039/600/400" alt="Ukázka plotu 2" class="gallery-img">
+                    <img src="https://picsum.photos/id/1038/600/400" alt="Exteriér 3" class="gallery-img">
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <h3>Zakázková kovovýroba</h3>
+                <div class="gallery-grid">
+                    <img src="https://picsum.photos/id/175/600/400" alt="Kovovýroba 1" class="gallery-img">
+                    <img src="https://picsum.photos/id/176/600/400" alt="Kovovýroba 2" class="gallery-img">
+                    <img src="https://picsum.photos/id/177/600/400" alt="Kovovýroba 3" class="gallery-img">
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <h3>Laserové svařování</h3>
+                <div class="gallery-grid">
+                    <img src="https://picsum.photos/id/200/600/400" alt="Laser 1" class="gallery-img">
+                    <img src="https://picsum.photos/id/201/600/400" alt="Laser 2" class="gallery-img">
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <h3>3D tisk a prototypování</h3>
+                <div class="gallery-grid">
+                    <img src="https://picsum.photos/id/250/600/400" alt="3D tisk 1" class="gallery-img">
+                    <img src="https://picsum.photos/id/251/600/400" alt="3D tisk 2" class="gallery-img">
+                    <img src="https://picsum.photos/id/252/600/400" alt="3D tisk 3" class="gallery-img">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TKAP s.r.o. Všechna práva vyhrazena.</p>
+    </footer>
+
+</body>
+</html>

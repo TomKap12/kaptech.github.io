@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontakty na strojírenskou firmu TKAP. Tomáš Kapera.">
+    <title>Kontakty | TKAP</title>
+    <style>
+        /* --- ZÁKLADNÍ RESET A TYPOGRAFIE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HLAVIČKA A NAVIGAČNÍ LIŠTA --- */
+        header {
+            background-color: #1e2229;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 24pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .logo-text span {
+            color: #007bff;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 11pt;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #007bff;
+        }
+
+        /* --- SEKCE: KONTAKTY --- */
+        main {
+            flex: 1;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section-title {
+            font-size: 24pt;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #007bff;
+        }
+
+        /* Nové uspořádání: Vše pod sebou */
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Mezera mezi firemními údaji a vizitkami */
+            margin-bottom: 50px;
+        }
+
+        /* Široká dlaždice: Firemní údaje */
+        .company-info {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #1e2229; /* Tmavý pruh nahoře pro elegantní vzhled */
+        }
+
+        .company-info h2 {
+            font-size: 18pt;
+            color: #1e2229;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Vnitřek firemních údajů rozdělený na dva sloupce */
+        .company-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-block h3 {
+            font-size: 13pt;
+            color: #007bff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .info-block p {
+            color: #555;
+            font-size: 11pt;
+            margin-bottom: 5px;
+        }
+
+        .info-block strong {
+            color: #333;
+        }
+
+        .registry-note {
+            grid-column: 1 / -1; /* Roztáhne poznámku přes celou šířku */
+            text-align: center;
+            margin-top: 20px;
+            font-size: 9pt;
+            color: #888;
+            border-top: 1px solid #ebedf0;
+            padding-top: 15px;
+        }
+
+        /* Tým / Vizitky */
+        .team-section h3 {
+            font-size: 18pt;
+            color: #1e2229;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .team-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid #007bff;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .team-card h4 {
+            font-size: 16pt;
+            color: #1e2229;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 10pt;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .team-contact {
+            font-size: 11pt;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .team-contact a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .team-contact a:hover {
+            color: #007bff;
+        }
+
+        /* --- MAPA --- */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background-color: #e5e3df;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: #1e2229;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 10pt;
+        }
+
+        /* --- RESPONSIVITA (PRO MOBILY) --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            main {
+                padding-top: 150px;
+            }
+            .company-details-grid {
+                grid-template-columns: 1fr; /* Na mobilu se sloupce fakturace a adresy srovnají pod sebe */
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html" class="logo-text">TKAP<span>.</span></a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#domu">Domů</a></li>
+                    <li><a href="index.html#o-nas">O nás</a></li>
+                    <li><a href="index.html#sluzby">Služby</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="kontakty.html" class="active">Kontakty</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="section-title">Kontakty</h1>
+
+        <div class="contact-container">
+            
+            <div class="company-info">
+                <h2>Firemní údaje</h2>
+                
+                <div class="company-details-grid">
+                    <div class="info-block">
+                        <h3>Fakturační údaje</h3>
+                        <p><strong>Tomáš Kapera</strong></p>
+                        <p>IČO: 12345678 <em>(doplň)</em></p>
+                        <p>DIČ: CZ12345678 <em>(pokud jsi plátce)</em></p>
+                        <p>Bankovní spojení: 123456789/0000 <em>(volitelné)</em></p>
+                    </div>
+
+                    <div class="info-block">
+                        <h3>Sídlo a Provozovna</h3>
+                        <p>Průmyslová 123</p>
+                        <p>100 00 Město</p>
+                        <p>Česká republika</p>
+                    </div>
+
+                    <div class="registry-note">
+                        Podnikatel je zapsán v živnostenském rejstříku.
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h3>Náš tým</h3>
+                <div class="team-grid">
+                    
+                    <div class="team-card">
+                        <h4>Tomáš Kapera</h4>
+                        <span class="team-role">Majitel / Výroba</span>
+                        <p class="team-contact">
+                            Tel: <a href="tel:+420704711735">+420 704 711 735</a>
+                        </p>
+                        <p class="team-contact">
+                            E-mail: <a href="mailto:kapera@tkap.cz">kapera@tkap.cz</a>
+                        </p>
+                    </div>
+
+                    <div class="team-card">
+                        <h4>Jméno Příjmení</h4>
+                        <span class="team-role">Technolog / Obchod</span>
+                        <p class="team-contact">
+                            Tel: <a href="tel:+42
