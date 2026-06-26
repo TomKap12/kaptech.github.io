@@ -1,985 +1,151 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KAPTECH - Inovace v Technice</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-  <style>
-    /* Základní reset a box-sizing */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0);
-      color: #333;
-      line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    /* Hlavička - Logo a Navigace */
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 0 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      min-height: 100px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-    }
-
-    header .logo-link {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-    header img {
-      max-height: 70px; /* Vráceno na původní velikost 70px */
-      height: auto;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-    header img:hover {
-        transform: scale(1.05);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    nav a {
-      color: #333;
-      text-decoration: none;
-      margin-left: 30px;
-      font-weight: 600;
-      font-size: 1.1em;
-      transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-      padding: 10px 0;
-      position: relative;
-    }
-
-    nav a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 3px;
-        background-color: #d00000;
-        bottom: -5px;
-        left: 0;
-        transition: width 0.3s ease-in-out;
-    }
-    nav a:hover::after {
-        width: 100%;
-    }
-    nav a:hover {
-      color: #d00000;
-      transform: translateY(-2px);
-    }
-
-    /* Slider */
-    .slider {
-      position: relative;
-      width: 100%;
-      height: 700px;
-      overflow: hidden;
-      margin-bottom: 60px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      border-radius: 12px;
-      transform: translateY(-20px);
-      opacity: 0;
-      animation: slideIn 1s forwards ease-out;
-    }
-
-    @keyframes slideIn {
-        to {
-            transform: translateY(0);
-            opacity: 1;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRUTÁLNÍ TEST: STRÁNKA AKTIVNÍ</title>
+    <style>
+        /* ZÁKLADNÍ NASTAVENÍ: TVRDÝ KONTRAST */
+        :root {
+            --neon-green: #00ff00;
+            --black: #000000;
+            --white: #ffffff;
+            --magenta: #ff00ff;
+            --glitch-size: 5px;
         }
-    }
 
-    .slider img.active {
-      opacity: 1;
-      z-index: 1;
-    }
-    .slider img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1.2s ease-in-out;
-    }
-
-    /* Úvodní sekce */
-    .intro {
-      text-align: center;
-      padding: 80px 20px;
-      background: #fff;
-      margin-bottom: 60px;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      animation: fadeIn 1s forwards ease-out 0.5s;
-      opacity: 0;
-    }
-
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
+        body {
+            background-color: var(--black);
+            color: var(--neon-green);
+            font-family: 'Courier New', Courier, monospace; /* Monospace pro raw look */
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-    }
 
-    .intro h1 { /* Toto pravidlo už nebude potřeba pro obrázek, ale ponechávám ho pro případ, že by se text vrátil */
-      font-family: 'Oswald', sans-serif;
-      font-size: 4.5rem;
-      margin-bottom: 25px;
-      color: #d00000;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .intro .intro-logo { /* Nové pravidlo pro logo v úvodní sekci */
-        max-width: 300px; /* Nastavte podle potřeby */
-        height: auto;
-        margin-bottom: 25px;
-    }
-
-    .intro p {
-      font-size: 1.3rem;
-      max-width: 850px;
-      margin: 0 auto;
-      color: #555;
-    }
-
-    /* Sekce služeb */
-    #services {
-      max-width: 1200px;
-      margin: 0 auto 80px;
-      padding: 60px 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1s forwards ease-out 0.7s;
-      opacity: 0;
-    }
-
-    #services h2 {
-      font-family: 'Oswald', sans-serif;
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 3.5rem;
-      color: #d00000;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .service-card {
-      background: #fdfdfd;
-      border: 1px solid #eee;
-      border-radius: 15px;
-      padding: 40px 35px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      transition: box-shadow 0.4s ease, transform 0.4s ease, background 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background-color: #d00000;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
-    }
-    .service-card:hover::before {
-        transform: translateY(0);
-    }
-
-    .service-card:hover {
-      box-shadow: 0 15px 40px rgba(208, 0, 0, 0.2);
-      transform: translateY(-8px);
-      background: #fff;
-    }
-
-    .service-card i {
-        font-size: 3.5rem;
-        color: #d00000;
-        margin-bottom: 20px;
-        transition: transform 0.3s ease;
-    }
-    .service-card:hover i {
-        transform: scale(1.1);
-    }
-
-    .service-card strong {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.2rem;
-      margin-bottom: 15px;
-      color: #333;
-      text-transform: uppercase;
-    }
-
-    .service-card p {
-      color: #666;
-      font-size: 1.15rem;
-      line-height: 1.6;
-    }
-
-    /* --- Nové sekce --- */
-
-    /* Sekce Proč si vybrat KAPTECH */
-    .why-us {
-        max-width: 1200px;
-        margin: 0 auto 80px;
-        padding: 60px 20px;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        animation: fadeIn 1s forwards ease-out 1.1s;
-        opacity: 0;
-    }
-    .why-us h2 {
-        font-family: 'Oswald', sans-serif;
-        text-align: center;
-        margin-bottom: 50px;
-        font-size: 3.5rem;
-        color: #d00000;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
-    .why-us-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
-    }
-    .why-us-item {
-        background: #fdfdfd;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .why-us-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    .why-us-item i {
-        font-size: 3rem;
-        color: #d00000;
-        margin-bottom: 15px;
-    }
-    .why-us-item h3 {
-        font-family: 'Oswald', sans-serif;
-        font-size: 1.8rem;
-        color: #333;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-    }
-    .why-us-item p {
-        font-size: 1.05rem;
-        color: #666;
-    }
-
-    /* Sekce Portfolio */
-    .portfolio-preview {
-        max-width: 1200px;
-        margin: 0 auto 80px;
-        padding: 60px 20px;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        animation: fadeIn 1s forwards ease-out 1.3s;
-        opacity: 0;
-    }
-    .portfolio-preview h2 {
-        font-family: 'Oswald', sans-serif;
-        text-align: center;
-        margin-bottom: 50px;
-        font-size: 3.5rem;
-        color: #d00000;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 0; /* Odstranit margin, kdyz neni tlacitko */
-    }
-    .portfolio-item {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .portfolio-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
-    .portfolio-item img {
-        width: 100%;
-        height: 220px; /* Pevná výška pro jednotný vzhled */
-        object-fit: cover;
-        display: block;
-        transition: transform 0.3s ease;
-    }
-    .portfolio-item:hover img {
-        transform: scale(1.05);
-    }
-    .portfolio-info {
-        padding: 20px;
-        text-align: center;
-        background: #fefefe;
-        width: 100%;
-    }
-    .portfolio-info h3 {
-        font-family: 'Oswald', sans-serif;
-        font-size: 1.5rem;
-        color: #333;
-        margin-bottom: 5px;
-    }
-    .portfolio-info p {
-        font-size: 0.95rem;
-        color: #777;
-    }
-
-    /* Sekce Reference */
-    .references {
-        max-width: 1000px;
-        margin: 0 auto 80px;
-        padding: 60px 20px;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        animation: fadeIn 1s forwards ease-out 1.5s;
-        opacity: 0;
-    }
-    .references h2 {
-        font-family: 'Oswald', sans-serif;
-        text-align: center;
-        margin-bottom: 50px;
-        font-size: 3.5rem;
-        color: #d00000;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
-    .testimonial-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-    .testimonial-card {
-        background: #fdfdfd;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        text-align: left;
-        border-left: 5px solid #d00000; /* Výrazný prvek */
-    }
-    .testimonial-card p {
-        font-size: 1.05rem;
-        font-style: italic;
-        color: #555;
-        margin-bottom: 15px;
-    }
-    .testimonial-card strong {
-        display: block;
-        font-size: 1.1rem;
-        color: #333;
-        font-weight: 600;
-    }
-    .testimonial-card span {
-        display: block;
-        font-size: 0.9rem;
-        color: #888;
-    }
-
-
-    /* Kontaktní sekce */
-    #contact {
-      max-width: 800px;
-      margin: 0 auto 80px;
-      padding: 60px 50px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      animation: fadeIn 1s forwards ease-out 1.7s;
-      opacity: 0;
-    }
-
-    #contact h2 {
-      font-family: 'Oswald', sans-serif;
-      text-align: center;
-      margin-bottom: 45px;
-      font-size: 3.2rem;
-      color: #d00000;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    #contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    #contact label {
-      font-weight: 600;
-      margin-bottom: 8px;
-      display: block;
-      color: #444;
-      font-size: 1.1em;
-    }
-
-    #contact input[type="text"],
-    #contact input[type="email"],
-    #contact textarea {
-      padding: 16px 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      resize: vertical;
-      transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      background-color: #fefefe;
-    }
-
-    #contact input[type="text"]:focus,
-    #contact input[type="email"]:focus,
-    #contact textarea:focus {
-      border-color: #d00000;
-      box-shadow: 0 0 12px rgba(208, 0, 0, 0.3);
-      outline: none;
-    }
-
-    #contact button {
-      background: #d00000;
-      color: #fff;
-      padding: 18px;
-      font-size: 1.4rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    #contact button:hover {
-      background: #ff0000;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(208, 0, 0, 0.3);
-    }
-
-    /* Hlavní patička s kontakty a sociálními sítěmi */
-    .main-footer {
-        background-color: #1c1c1c;
-        color: #f0f0f0;
-        padding: 40px 20px;
-        font-size: 1rem;
-        margin-top: auto;
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-      align-items: flex-start;
-    }
-
-    .footer-left {
-        width: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-left img {
-      max-width: 180px;
-      margin-bottom: 15px;
-      height: auto;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      margin-right: 20px;
-      color: #f0f0f0;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1em;
-      transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-    }
-    .social-icons a:hover {
-      color: #d00000;
-      transform: translateY(-2px);
-    }
-
-    .footer-right {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 40px;
-        justify-content: flex-end;
-        flex-grow: 1;
-    }
-
-    .contact-block {
-        line-height: 1.6;
-        white-space: nowrap;
-    }
-    .contact-block strong {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 1.1rem;
-      color: #d00000;
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .contact-block a {
-      color: #f0f0f0;
-      text-decoration: none;
-      transition: color 0.3s ease-in-out;
-    }
-    .contact-block a:hover {
-      color: #ff0000;
-    }
-
-    /* Spodní copyright patička */
-    .copyright-footer {
-        background: #d00000;
-        color: #fff;
-        text-align: center;
-        padding: 15px 20px;
-        font-size: 0.9rem;
-        letter-spacing: 0.5px;
-    }
-
-    /* Responzivní design */
-    @media (max-width: 1024px) {
-        .intro h1 {
-            font-size: 3.5rem;
+        /* TVRDÝ OBECNÝ STYL PRO VŠECHNY PRVKY */
+        * {
+            box-sizing: border-box;
+            border: 3px solid var(--neon-green); /* Všude tvrdé rámečky */
+            margin-bottom: 15px;
         }
-        .intro .intro-logo {
-            max-width: 250px; /* Upraveno pro menší obrazovky */
-        }
-        #services h2,
-        .why-us h2,
-        .portfolio-preview h2,
-        .references h2 {
-            font-size: 2.8rem;
-        }
-        #contact h2 {
+
+        /* BRUTÁLNÍ HEADER: GLITCH EFEKT PŘES TEXT */
+        header {
+            position: relative;
+            padding: 10px 30px;
+            background-color: var(--neon-green);
+            color: var(--black);
+            font-weight: bold;
             font-size: 2.5rem;
+            text-transform: uppercase;
+            text-shadow: calc(var(--glitch-size) * -1) 0 var(--magenta), var(--glitch-size) 0 cyan;
+            animation: textGlitch 1.5s infinite alternate;
         }
-        .main-footer {
-            padding: 30px 20px;
+
+        @keyframes textGlitch {
+            0% { text-shadow: -3px 0 var(--magenta), 3px 0 cyan; }
+            50% { text-shadow: 3px 0 var(--magenta), -3px 0 cyan; }
+            100% { text-shadow: 2px -2px var(--magenta), -2px 2px cyan; }
         }
-        .footer-content {
-            gap: 20px;
+
+        /* SEKCE S RAW GRAFIKOU (EMOJI) */
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
         }
-        .footer-left img {
-            max-width: 150px;
+
+        .raw-graphics {
+            font-size: 4rem;
+            text-align: center;
+            border: none; /* Odstraní rámeček jen pro emoji */
         }
-        .social-icons a {
-            font-size: 0.9em;
+
+        /* TVRDÁ KARTA PRO OBSAH */
+        .card {
+            border: 5px solid var(--neon-green);
+            background: linear-gradient(135deg, #001a00, #000000);
+            box-shadow: 10px 10px 0 var(--magenta); /* Neo-brutalist stín */
+            padding: 20px;
         }
-        .contact-block strong {
-            font-size: 1rem;
+
+        h2 {
+            color: var(--white);
+            margin-top: 0;
+            border-bottom: 3px dashed var(--neon-green);
+            padding-bottom: 10px;
         }
-        .contact-block {
-            font-size: 0.95em;
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.4;
         }
-        .why-us-item h3 {
-            font-size: 1.6rem;
+
+        /* BRUTÁLNÍ TLAČÍTKO S GLITCH EFEKTEM NA HOVER */
+        .btn {
+            display: inline-block;
+            background-color: var(--magenta);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 4px solid var(--black);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.1s;
         }
-        .portfolio-info h3 {
-            font-size: 1.3rem;
+
+        .btn:hover {
+            box-shadow: 8px 8px 0 var(--cyan);
+            transform: translate(-4px, -4px);
         }
-        .testimonial-card p {
-            font-size: 1rem;
+
+        .btn::after {
+            content: '!! RAW OUTPUT !!';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--neon-green);
+            color: var(--black);
+            opacity: 0;
+            display: flex; align-items: center; justify-content: center;
         }
-    }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-        min-height: auto;
-      }
+        .btn:active::after {
+            opacity: 1;
+        }
 
-      nav a {
-        margin: 5px 10px;
-        padding: 5px 0;
-        font-size: 1em;
-      }
-
-      .slider {
-        height: 400px;
-        margin-bottom: 40px;
-      }
-
-      .intro {
-        padding: 50px 20px;
-        margin-bottom: 40px;
-      }
-
-      .intro h1 { /* Toto pravidlo už nebude potřeba pro obrázek, ale ponechávám ho pro případ, že by se text vrátil */
-        font-size: 2.8rem;
-      }
-      .intro .intro-logo {
-          max-width: 200px; /* Upraveno pro menší obrazovky */
-          margin-bottom: 20px;
-      }
-
-      .intro p {
-        font-size: 1.1rem;
-      }
-
-      #services,
-      .why-us,
-      .portfolio-preview,
-      .references,
-      #contact {
-        padding: 40px 20px;
-        margin-bottom: 50px;
-      }
-
-      #services h2,
-      .why-us h2,
-      .portfolio-preview h2,
-      .references h2,
-      #contact h2 {
-        font-size: 2.2rem;
-        margin-bottom: 30px;
-      }
-
-      .services-grid,
-      .why-us-grid,
-      .portfolio-grid,
-      .testimonial-grid {
-        gap: 25px;
-      }
-
-      .service-card {
-        padding: 30px;
-      }
-
-      .service-card i, .why-us-item i {
-        font-size: 3rem;
-      }
-
-      .service-card strong, .why-us-item h3 {
-        font-size: 1.8rem;
-      }
-
-      .service-card p, .why-us-item p {
-        font-size: 1rem;
-      }
-
-      #contact button {
-        padding: 14px;
-        font-size: 1.2rem;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 30px;
-      }
-
-      .footer-left,
-      .footer-right {
-        width: 100%;
-        align-items: center;
-      }
-      .footer-right {
-          flex-direction: column;
-          gap: 15px;
-          justify-content: center;
-      }
-
-      .footer-left img {
-        margin-bottom: 15px;
-      }
-
-      .social-icons {
-        margin-top: 10px;
-      }
-      .social-icons a {
-        margin: 0 10px;
-      }
-      .main-footer {
-          padding: 25px 20px;
-      }
-      .footer-content {
-          gap: 20px;
-      }
-      .footer-left img {
-          max-width: 120px;
-      }
-      .social-icons a {
-          font-size: 0.85em;
-          margin: 0 8px;
-      }
-      .contact-block strong {
-          font-size: 1em;
-      }
-      .contact-block {
-          font-size: 0.9em;
-      }
-      .portfolio-item img {
-          height: 180px;
-      }
-    }
-  </style>
+        /* FOOTER S CHATOVOU ATMOSFÉROU */
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            border: none;
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="#home" class="logo-link">
-      <img src="obr/logo1.svg" alt="KAPTECH logo" />
-    </a>
-    <nav>
-      <a href="#home">Domů</a>
-      <a href="#services">Služby</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="#contact">Kontakt</a>
-    </nav>
-  </header>
 
-  <div class="slider">
-    <img src="obrazky/img1.jpg" alt="Moderní průmyslové stroje" class="active" />
-    <img src="obrazky/img2.jpg" alt="Inovativní technologie" />
-    <img src="obrazky/img3.jpg" alt="Přesná kovovýroba" />
-    <img src="obrazky/img4.jpg" alt="Automatizace procesů" />
-    <img src="obrazky/img5.jpg" alt="Vodohospodářské řešení" />
-    <img src="obrazky/img6.jpg" alt="3D tisk prototypů" />
-    <img src="obrazky/img7.jpg" alt="Elektroinstalace pro průmysl" />
-    <img src="obrazky/img8.jpg" alt="Tým odborníků" />
-    <img src="obrazky/img9.jpg" alt="Detailní práce" />
-    <img src="obrazky/img10.jpg" alt="Moderní dílna" />
-    <img src="obrazky/img11.jpg" alt="Kontrola kvality" />
-    <img src="obrazky/img12.jpg" alt="Inženýrská řešení" />
-    <img src="obrazky/img13.jpg" alt="Výroba komponentů" />
-    <img src="obrazky/img14.jpg" alt="Zákaznická podpora" />
-    <img src="obrazky/img15.jpg" alt="Budování budoucnosti" />
-  </div>
+    <header>SYSTEM_STATUS_04</header>
 
-  <main>
-    <section class="intro" id="intro">
-      <img src="obr/logo1.svg" alt="KAPTECH logo" class="intro-logo" /> <p>KAPTECH je moderní firma specializující se na **kovovýrobu, elektroinstalace, vodoinstalace a 3D tisk.** Díky dlouholetým zkušenostem a špičkovému vybavení poskytujeme našim zákazníkům komplexní řešení na míru – od návrhu až po realizaci. Spolehněte se na kvalitu, preciznost a inovace.</p>
-    </section>
+    <main>
+        <div class="raw-graphics">💀🔧👾</div>
 
-    <section id="services">
-      <h2>Naše služby</h2>
-      <div class="services-grid">
-        <a href="kovovyroba.html" class="service-card">
-            <i class="fas fa-cogs"></i>
-            <strong>Kovovýroba</strong>
-            <p>Zámečnické práce, svařování, CNC obrábění a výroba kovových konstrukcí.</p>
-        </a>
-        <a href="elektro.html" class="service-card">
-            <i class="fas fa-bolt"></i>
-            <strong>Elektro</strong>
-            <p>Montáže elektroinstalací, revize a servis elektrických zařízení.</p>
-        </a>
-        <a href="voda.html" class="service-card">
-            <i class="fas fa-faucet"></i>
-            <strong>Voda</strong>
-            <p>Instalace a opravy vodovodních systémů a kanalizace.</p>
-        </a>
-        <a href="3d-tisk.html" class="service-card center-3d">
-            <i class="fas fa-cube"></i>
-            <strong>3D tisk</strong>
-            <p>Prototypování, výroba dílů a tisk na míru z různých materiálů.</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="why-us" id="why-us-section">
-        <h2>Proč si vybrat KAPTECH?</h2>
-        <div class="why-us-grid">
-            <div class="why-us-item">
-                <i class="fas fa-award"></i>
-                <h3>Zkušenosti a spolehlivost</h3>
-                <p>Máme dlouholeté zkušenosti v oboru a stovky úspěšně dokončených projektů. Můžete se na nás plně spolehnout.</p>
-            </div>
-            <div class="why-us-item">
-                <i class="fas fa-cogs"></i>
-                <h3>Komplexní řešení</h3>
-                <p>Nabízíme široké spektrum služeb pod jednou střechou – od návrhu po realizaci. Šetříme váš čas i peníze.</p>
-            </div>
-            <div class="why-us-item">
-                <i class="fas fa-lightbulb"></i>
-                <h3>Inovace a technologie</h3>
-                <p>Používáme nejmodernější technologie a postupy, včetně 3D tisku, pro efektivní a precizní výsledky.</p>
-            </div>
-            <div class="why-us-item">
-                <i class="fas fa-handshake"></i>
-                <h3>Individuální přístup</h3>
-                <p>Ke každému zákazníkovi přistupujeme individuálně a hledáme řešení přesně na míru jeho potřebám.</p>
-            </div>
+        <div class="card">
+            <h2>TEST_VERZE_01 // BRUTÁLNÍ</h2>
+            <p>Hele, tady máš tu slíbenou brutalistickou stránku. Je to schválně hnusný, ostrý a přehnaný. Monospace font, zářivý barvy, tvrdý stíny, žádný zjemňování. </p>
+            <p>Zkus na tuhle stránku nahrát nějaký nový obrázky (třeba tu vygenerovanou brutální grafiku) a otestuj, jak rychle GitHub Pages zareagují. </p>
+            <a href="#" class="btn">DESTRUKCE_LOGU</a>
         </div>
-    </section>
+    </main>
 
-    <section class="portfolio-preview" id="portfolio-section">
-        <h2>Vybrané projekty</h2>
-        <div class="portfolio-grid">
-            <a href="projekt1.html" class="portfolio-item">
-                <img src="obrazky/projekt1-nahled.jpg" alt="Detail kovové konstrukce" />
-                <div class="portfolio-info">
-                    <h3>Precizní kovovýroba</h3>
-                    <p>Zakázková výroba složitých kovových dílů pro strojírenství.</p>
-                </div>
-            </a>
-            <a href="projekt2.html" class="portfolio-item">
-                <img src="obrazky/projekt2-nahled.jpg" alt="Instalace elektro rozvodů" />
-                <div class="portfolio-info">
-                    <h3>Moderní elektroinstalace</h3>
-                    <p>Kompletní realizace elektro rozvodů v průmyslovém objektu.</p>
-                </div>
-            </a>
-            <a href="projekt3.html" class="portfolio-item">
-                <img src="obrazky/projekt3-nahled.jpg" alt="Instalace vodovodního potrubí" />
-                <div class="portfolio-info">
-                    <h3>Vodoinstalace a sanita</h3>
-                    <p>Instalace a rekonstrukce vodovodních systémů v bytových domech.</p>
-                </div>
-            </a>
-            <a href="projekt4.html" class="portfolio-item">
-                <img src="obrazky/projekt4-nahled.jpg" alt="3D tisk prototypu" />
-                <div class="portfolio-info">
-                    <h3>Prototypování 3D tiskem</h3>
-                    <p>Výroba funkčních prototypů pro automobilový průmysl.</p>
-                </div>
-            </a>
-        </div>
-    </section>
+    <footer>RAW_WEB_ALPHA v0.9 // POUŽITO_PRO_TEST_GITHUB_PAGES</footer>
 
-    <section class="references" id="references-section">
-        <h2>Co o nás říkají klienti?</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <p>"Společnost KAPTECH nám dodala řešení na míru, které předčilo naše očekávání. Precizní práce a skvělá komunikace."</p>
-                <strong>Jan Novák</strong>
-                <span>Generální ředitel, ABC Holding</span>
-            </div>
-            <div class="testimonial-card">
-                <p>"Byli jsme ohromeni rychlostí a kvalitou 3D tisku prototypů. KAPTECH je náš partner číslo jedna pro inovace."</p>
-                <strong>Kateřina Dvořáková</strong>
-                <span>Vedoucí vývoje, Inovace s.r.o.</span>
-            </div>
-             <div class="testimonial-card">
-                <p>"Potřebovali jsme komplexní rekonstrukci elektro a vody. Vše proběhlo hladce a profesionálně. Vřele doporučujeme!"</p>
-                <strong>Petr Svoboda</strong>
-                <span>Majitel nemovitosti</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-      <h2>Kontaktujte nás</h2>
-      <form action="https://formsubmit.co/tomas.kapera@seznam.cz" method="POST">
-        <label for="name">Jméno:</label>
-        <input type="text" id="name" name="name" required />
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="message">Zpráva:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-
-        <input type="hidden" name="_next" value="https://tvujweb.cz/dekujeme.html" />
-        
-        <button type="submit">Odeslat</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="main-footer">
-    <div class="footer-content">
-      <div class="footer-left">
-        <img src="obr/logo2.svg" alt="KAPTECH logo" /> 
-        <div class="social-icons">
-          <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
-        </div>
-      </div>
-      <div class="footer-right">
-        <div class="contact-block">
-          <strong>Kovovýroba, Elektro, Voda</strong><br />
-          Roman Kapera<br />
-          Tel: +420 111 111 111<br />
-          Email: <a href="mailto:roman.kapera@kaptech.cz">roman.kapera@kaptech.cz</a>
-        </div>
-        <div class="contact-block">
-          <strong>3D tisk</strong><br />
-          Tomáš Kapera<br />
-          Tel: +420 222 222 222<br />
-          Email: <a href="mailto:tomas.kapera@kaptech.cz">tomas.kapera@kaptech.cz</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <footer class="copyright-footer">
-    &copy; 2025 kaptech.cz Všechna práva vyhrazena.
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
